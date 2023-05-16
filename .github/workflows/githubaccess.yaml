@@ -11,7 +11,7 @@ jobs:
   update-approvers:
     name: update-approvers
     runs-on: ubuntu-latest
-#     permissions: write-all
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
       - name: Get UserIDs
