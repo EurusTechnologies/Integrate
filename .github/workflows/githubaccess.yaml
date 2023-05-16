@@ -34,10 +34,13 @@ jobs:
         run: |
             echo $JSON_STRING
             REPOS=()
-            filename='.github/workflows/includedRepos.txt'
-            n=1
-            while read line; do
-            # reading each line
-            echo "Line No. $n : $line"
-            n=$((n+1))
-            done < $filename
+            exec 3< ".github/workflows/includedRepos.txt"
+
+            # Read the file line by line
+            while IFS= read -r line <&3; do
+              # Process each line (you can replace this with your own logic)
+              echo "Processing line: $line"
+            done
+
+            # Close the file descriptor
+            exec 3<&-
