@@ -40,4 +40,6 @@ jobs:
               REPOS+=("$line")
             done
             exec 3<&-
-            echo $REPOS
+            for item in "${REPOS[@]}"; do
+              echo "$item"
+            done
