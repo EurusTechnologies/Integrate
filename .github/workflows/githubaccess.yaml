@@ -39,7 +39,8 @@ jobs:
               # append the line to the array
               REPOS+=("$line")
             done < .github/workflows/includedRepos.txt
-            for repo in ${REPOS[@]}; do 
+            for repo in ${REPOS[@]}; do
+              echo $repo
               ENVIRONMENT_NAMES=$(curl -L \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer $GITHUB_TOKEN" \
