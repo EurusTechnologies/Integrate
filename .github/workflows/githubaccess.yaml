@@ -34,7 +34,7 @@ jobs:
         run: |
             echo $JSON_STRING
             REPOS=()
-            filename='github/workflows/includedRepos.txt'
+            filename='.github/workflows/includedRepos.txt'
             n=1
             while read line; do
             # reading each line
