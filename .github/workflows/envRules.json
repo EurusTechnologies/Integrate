@@ -1,0 +1,16 @@
+[
+    {
+        "name": "integration",
+        "reviewers": [
+            {
+                "type": "User",
+                "id": 91880665
+            },
+            {
+                "type": "User",
+                "id": 58989988
+            }
+        ],
+        "deployment_branch_policy": null
+    }
+]

@@ -1,0 +1,61 @@
+name: Update BM approvers
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions: write-all
+  #issues: write
+
+jobs:     
+  update-approvers:
+    name: update-approvers
+    runs-on: ubuntu-latest
+#     permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get UserIDs
+        run: |
+          ls -la
+          array=($(jq '.[].reviewers[].id' .github/workflows/envRules.json))
+          JSON_STRING='{"reviewers":['
+          for userId in ${array[@]}; do 
+            JSON_STRING=$JSON_STRING'{"type":"User","id":'"$userId"'},'
+          done
+          JSON_STRING=$JSON_STRING']}'
+          # Get the position of the last comma
+          last_comma=$(echo "$JSON_STRING" | grep -aob ',' | tail -1 | cut -d':' -f1)
+          # Remove the last comma from the string
+          JSON_STRING=${JSON_STRING:0:last_comma}${JSON_STRING:last_comma+1}
+          echo "JSON_STRING=$JSON_STRING" >> $GITHUB_ENV
+
+        
+      - name: Update environment settings for repos
+        run: |
+            echo $JSON_STRING
+            # REPOS=()
+            # # read the file line by line
+            # while IFS= read -r line; do
+            #   # append the line to the array
+            #   REPOS+=("$line")
+            # done < .github/workflows/includedRepos.txt
+            # for repo in ${REPOS[@]}; do 
+            #   ENVIRONMENT_NAMES=$(curl -L \
+            #   -H "Accept: application/vnd.github+json" \
+            #   -H "Authorization: Bearer $GITHUB_TOKEN" \
+            #   -H "X-GitHub-Api-Version: 2022-11-28" \
+            #   "https://api.github.com/repos/EurusTechnologies/$repo/environments" | jq -r '.environments[].name')
+            #   echo "ENVIRONMENT_NAMES"
+            #   echo $ENVIRONMENT_NAMES
+            #   for env in ${ENVIRONMENT_NAMES[@]}; do 
+            #     echo $env
+            #     echo "$JSON_STRING"
+            #     curl -L \
+            #     -X PUT \
+            #     -H "Accept: application/vnd.github+json" \
+            #     -H "Authorization: Bearer $GITHUB_TOKEN" \
+            #     -H "X-GitHub-Api-Version: 2022-11-28" \
+            #     "https://api.github.com/repos/EurusTechnologies/$repo/environments/$env" \
+            #     -d "$JSON_STRING"
+            #   done
+            # done
