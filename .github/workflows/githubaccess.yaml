@@ -34,11 +34,7 @@ jobs:
         run: |
             echo $JSON_STRING
             REPOS=()
-            # read the file line by line
-            while IFS= read -r line; do
-              # append the line to the array
-              REPOS+=("$line")
-            done < .github/workflows/includedRepos.txt
+            while read line; do REPOS+=("$line"); done < .github/workflows/includedRepos.txt
             for repo in ${REPOS[@]}; do
               echo $repo
               ENVIRONMENT_NAMES=$(curl -L \
