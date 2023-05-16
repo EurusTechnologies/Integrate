@@ -43,7 +43,8 @@ jobs:
             for item in "${REPOS[@]}"; do
               echo "$item"
             done
-            for repo in ${REPOS[@]}"; do
+            echo "new loop"
+            for repo in "${REPOS[@]}"; do
               echo $repo
               ENVIRONMENT_NAMES=$(curl -L \
               -H "Accept: application/vnd.github+json" \
