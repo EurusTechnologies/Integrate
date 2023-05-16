@@ -37,7 +37,7 @@ jobs:
             exec 3< ".github/workflows/includedRepos.txt"
 
             # Read the file line by line
-            while IFS= read -r line <&3; do
+            while IFS= read -r line <&3 || [ -n "$line" ]; do
               # Process each line (you can replace this with your own logic)
               echo "Processing line: $line"
             done
