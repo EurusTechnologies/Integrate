@@ -38,7 +38,6 @@ jobs:
             while IFS= read -r line; do
               # append the line to the array
               REPOS+=("$line")
-              echo $REPOS
               echo "$line"
             done < .github/workflows/includedRepos.txt
             echo $REPOS
