@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Dev",
+        "reviewers": [
+            {
+                "type": "User",
+                "id": 91880665
+            },
+            {
+                "type": "User",
+                "id": 58989988
+            },
+            {
+                "type":"User",
+                "id":45728748
+            }
+        ],
+        "deployment_branch_policy": null
+    },
+    {
+        "name": "Test",
+        "reviewers": [
+            {
+                "type":"User",
+                "id":45728748
+            }
+        ],
+        "deployment_branch_policy": null
+    }
+]
